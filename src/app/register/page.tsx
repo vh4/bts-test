@@ -39,8 +39,8 @@ const Register: React.FC = () => {
     <section className="h-screen flex flex-col md:flex-row justify-center items-center space-y-10 md:space-y-0 md:space-x-16 p-6">
       <div className="md:w-1/3 max-w-sm flex justify-center">
         <Image
-          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          alt="Register illustration"
+      src="/draw2.png"
+      alt="Register illustration"
           width={500}
           height={300}
           className="max-w-xs mx-auto"
