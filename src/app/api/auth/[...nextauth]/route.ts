@@ -6,16 +6,16 @@ import axios from "axios";
 // Extend the default User type from NextAuth to include custom fields
 interface CustomUser extends User {
   token: string;
-  username:string;
+  username: string;
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
         username: { label: "username", type: "text", placeholder: "username" },
-        password: { label: "password", type: "password", placeholder: "password"  },
+        password: { label: "password", type: "password", placeholder: "password" },
       },
       async authorize(credentials): Promise<CustomUser | null> {
         const data = {
@@ -27,20 +27,19 @@ export const authOptions: NextAuthOptions = {
           const url = 'http://94.74.86.174:8080/api/login';
           const res = await axios.post(url, data);
 
-          if (res?.data?.statusCode == 2110) {
+          if (res?.data?.statusCode === 2110) {
             const userData = res?.data?.data;
             console.log(userData);
 
             return {
               ...userData,
               token: userData.token,
-              username:data.username
+              username: data.username,
             };
           } else {
             console.error('Authorization failed:', res.data);
             return null;
           }
-
         } catch (error) {
           console.error('Authorization error:', error);
           return null;
@@ -62,18 +61,20 @@ export const authOptions: NextAuthOptions = {
         return {
           ...token,
           accessToken: customUser.token,
-          username:customUser.username
+          username: customUser.username,
         };
       }
       return token;
     },
     async session({ session, token }) {
-        session.user = token as any ;
-        return session;
+      // Type the session.user to CustomUser instead of using any
+      session.user = token as unknown as CustomUser;
+      return session;
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
 
-export const handler = NextAuth(authOptions);
+// Export the NextAuth handler
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

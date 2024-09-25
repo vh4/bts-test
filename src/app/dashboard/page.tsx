@@ -3,14 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import { signOut, useSession } from 'next-auth/react'; // For authentication
 import { useRouter } from 'next/navigation';
-import { Nav, Navbar, Modal, Button, Notification, useToaster, Message } from 'rsuite'; // Import RSuite components
+import { Nav, Navbar, Modal, Button, Message, useToaster } from 'rsuite'; // Import RSuite components
 import 'rsuite/dist/rsuite.min.css'; // Import RSuite styles
 
 // Define an interface for checklist items
 interface ChecklistItem {
   id: number;
   name: string;
-  items: any; // Adjust this type based on the actual structure of items, if any
+  items: unknown; // Adjust this type based on the actual structure of items
   checklistCompletionStatus: boolean;
 }
 
@@ -23,9 +23,10 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState<string | null>(null); // Error state
   const [newChecklistName, setNewChecklistName] = useState(''); // New checklist name
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
   // Fetch checklist data from API
   useEffect(() => {
     const fetchChecklist = async () => {
@@ -44,7 +45,7 @@ const Dashboard: React.FC = () => {
           } else {
             setError(data.message || 'Failed to fetch checklists.');
           }
-        } catch (err) {
+        } catch {
           setError('An error occurred while fetching the checklists.');
         } finally {
           setLoading(false); // Stop loading once data is fetched
@@ -80,11 +81,10 @@ const Dashboard: React.FC = () => {
           setNewChecklistName(''); // Clear the input
           handleClose(); // Close the modal
         } else {
-          toaster.push(<Message type="error">Failed to add checklist......</Message>, { placement: 'topCenter' });
+          toaster.push(<Message type="error">Failed to add checklist...</Message>, { placement: 'topCenter' });
         }
-      } catch (err) {
+      } catch {
         toaster.push(<Message type="error">An error occurred while adding the checklist...</Message>, { placement: 'topCenter' });
-
       }
     }
   };
@@ -170,23 +170,23 @@ const Dashboard: React.FC = () => {
         </div>
 
         <Modal open={open} onClose={handleClose}>
-        <Modal.Header>
-          <Modal.Title>Modal Title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-           <input
+          <Modal.Header>
+            <Modal.Title>Modal Title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <input
               type="text"
               className="w-full border rounded p-2"
               placeholder="Enter checklist name"
               value={newChecklistName}
               onChange={(e) => setNewChecklistName(e.target.value)} // Update the state on input change
             />
-        </Modal.Body>
-        <Modal.Footer>
-        <Button onClick={handleAddChecklist} appearance="primary">Add</Button>
-        <Button onClick={handleClose} appearance="subtle">Cancel</Button>
-        </Modal.Footer>
-      </Modal>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={handleAddChecklist} appearance="primary">Add</Button>
+            <Button onClick={handleClose} appearance="subtle">Cancel</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </>
   );
