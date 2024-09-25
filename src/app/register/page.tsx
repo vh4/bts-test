@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Input, Button, Message, useToaster } from 'rsuite'; // React Suite
+import { Input, Button, Message, useToaster } from 'rsuite'; 
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -28,7 +28,7 @@ const Register: React.FC = () => {
         router.push('/');
       }, 3000);
     } catch (error) {
-      console.error('Registration error:', error); // Log the error
+      console.error('Registration error:', error); 
       toaster.push(<Message type="error">Registration failed. Please try again.</Message>, { placement: 'topCenter' });
     } finally {
       setLoading(false);
@@ -39,8 +39,8 @@ const Register: React.FC = () => {
     <section className="h-screen flex flex-col md:flex-row justify-center items-center space-y-10 md:space-y-0 md:space-x-16 p-6">
       <div className="md:w-1/3 max-w-sm flex justify-center">
         <Image
-      src="/draw2.png"
-      alt="Register illustration"
+          src="/draw2.png"
+          alt="Register illustration"
           width={500}
           height={300}
           className="max-w-xs mx-auto"

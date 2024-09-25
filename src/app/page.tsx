@@ -50,13 +50,13 @@ const Login: React.FC = () => {
     <>
       <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
         <div className="md:w-1/3 max-w-sm">
-      <Image
-      src="/draw2.png"
-      alt="Register illustration"
-      width={500} // Tentukan lebar gambar
-      height={300} // Tentukan tinggi gambar
-      className="max-w-xs mx-auto" // Menambahkan mx-auto untuk center alignment
-    />   
+          <Image
+            src="/draw2.png"
+            alt="Register illustration"
+            width={500} // Tentukan lebar gambar
+            height={300} // Tentukan tinggi gambar
+            className="max-w-xs mx-auto" // Menambahkan mx-auto untuk center alignment
+          />   
         </div>
         <div className="md:w-1/3 max-w-sm">
           <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
@@ -89,8 +89,8 @@ const Login: React.FC = () => {
               </button>
             </div>
           </form>
-          <div onClick={() => router.push('/register')} className="cursor-pointer mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
-            Don't have an account? <a className="text-red-600 hover:underline hover:underline-offset-4">Register</a>
+          <div onClick={() => router.push("/register")} className="cursor-pointer mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
+            Don&apos;t have an account? <a className="text-red-600 hover:underline hover:underline-offset-4">Register</a>
           </div>
         </div>
       </section>
